@@ -21,3 +21,18 @@ serviceWorkerRegistration.register();
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
+
+let deferredPrompt;
+const addBtn = document.querySelector('#enable-banner-install');
+window.addEventListener('beforeinstallprompt', (e) => {
+  console.log('beforeinstallprompt...');
+  addBtn.style.display = 'block';
+  e.preventDefault();
+  deferredPrompt = e;
+  addBtn.addEventListener('click', (e) => {
+    addBtn.style.display = 'none';
+    deferredPrompt.prompt();
+  });
+});
